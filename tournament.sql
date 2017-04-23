@@ -20,5 +20,3 @@ CREATE TABLE player(
 ); 
 
 
-
-CREATE VIEW rank AS SELECT p_id,name, (SELECT count(*) FROM game WHERE player.p_id = game.winner) AS wins, (SELECT count(*) FROM game WHERE player.p_id IN (game.loser,game.winner)) AS played FROM player ORDER BY wins DESC;
