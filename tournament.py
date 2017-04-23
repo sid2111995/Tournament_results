@@ -78,13 +78,6 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
-    query = "SELECT p_id, name , wins, played FROM rank"
-    db,cursor = connect()
-    cursor.execute(query)
-    val = cursor.fetchall()
-    cursor.close()
-    db.close()
-    return val
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
@@ -100,15 +93,6 @@ def reportMatch(winner, loser):
     db.close()
 
 
-def run(q):
-    db, cursor = connect()
-    cursor.execute(q)
-    val = cursor.fetchall()
-    cursor.close()
-    db.close()
-    return val
-
-
 
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
@@ -119,14 +103,5 @@ def swissPairings():
     to him or her in the standings.
     """
 
-    pairs = []
-    total = countPlayers()
-    for p in xrange(0, total, 2):
-        query = """SELECT p_id, name FROM rank ORDER BY wins
-        LIMIT 2 OFFSET """ + str(p)
-        res = run(query)
-        res = res[0] + res[1]
-        pairs.append(res)
-    return pairs
 
 
